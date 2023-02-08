@@ -1,0 +1,33 @@
+Deploy:
+  model: model.pdmodel
+  params: model.pdiparams
+  transforms:
+  - target_size:
+    - 192
+    - 192
+    type: Resize
+  - type: Normalize
+    # # 是否使用GPU预测
+    # USE_GPU: True
+    # # 模型和参数文件所在目录路径
+    # MODEL_PATH: ""
+    # # 模型文件名
+    # MODEL_FILENAME: "__model__"
+    # # 参数文件名
+    # PARAMS_FILENAME: "__params__"
+    # # 预测图片的的标准输入尺寸，输入尺寸不一致会做resize
+    # EVAL_CROP_SIZE: (512, 512)
+    # # 均值
+    # MEAN: [0.5, 0.5, 0.5]
+    # # 方差
+    # STD: [0.5, 0.5, 0.5]
+    # # 分类类型数
+    # NUM_CLASSES: 2
+    # # 图片通道数
+    # CHANNELS : 3
+    # # 预测模式，支持 NATIVE 和 ANALYSIS
+    # PREDICTOR_MODE: "ANALYSIS"
+    # # 每次预测的 batch_size
+    # BATCH_SIZE : 3
+    # USE_PR: 0
+    # TRT_MODE: ""
