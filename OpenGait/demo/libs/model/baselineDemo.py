@@ -280,9 +280,9 @@ class BaselineDemo(nn.Module):
         self.init_parameters()
 
 
-        if not training or self.engine_cfg['with_test']:
-            self.test_loader = self.get_loader(
-                cfgs['data_cfg'])
+        # if not training or self.engine_cfg['with_test']:
+        #     self.test_loader = self.get_loader(
+        #         cfgs['data_cfg'])
 
         self.device = torch.cuda.current_device()
         torch.cuda.set_device(self.device)
