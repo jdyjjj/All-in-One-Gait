@@ -46,8 +46,8 @@ def main():
     pgdict2 = recognise_feat(gallery_feat, probe_feat)
 
     # # write the result back to the video
-    # writeresult(pgdict1, video1_path, video_save_folder)
-    # writeresult(pgdict2, video2_path, video_save_folder)
+    writeresult(pgdict1, video1_path, video_save_folder)
+    writeresult(pgdict2, video2_path, video_save_folder)
 
 
 if __name__ == "__main__":
