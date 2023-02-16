@@ -89,8 +89,6 @@ def track(video_path, video_save_folder):
     mark = True
     diff = 0
     for i in tqdm(range(frame_count)):
-        if frame_id % 20 == 0:
-            logger.info('Processing frame {} ({:.2f} fps)'.format(frame_id, 1. / max(1e-5, timer.average_time)))
         ret_val, frame = cap.read()
 
         if ret_val:
