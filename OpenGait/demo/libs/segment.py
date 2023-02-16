@@ -18,18 +18,11 @@ from tracking_utils.visualize import plot_tracking, plot_track
 from pretreatment import pretreat, img2pickle
 sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/paddle/")
 from seg_demo import seg_image
-sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/mm/")
-from seglib import seg_image_mm
 from yolox.exp import get_exp
-
-import mmcv
 
 seg_cfgs = {  
     "model":{
         "seg_model" : "./demo/checkpoints/seg_model/human_pp_humansegv2_mobile_192x192_inference_model_with_softmax/deploy.yaml",
-        "mm_config_file": "./demo/checkpoints/mm_model/fcn_hr18s_512x512_160k_ade20k.py",
-        "mm_checkpoint_file":"./demo/checkpoints/mm_model/fcn_hr18s_512x512_160k_ade20k_20210829_174739-f1e7c2e7.pth",
-        "mm_palette": "ade20k",
         "ckpt" :    "./demo/checkpoints/bytetrack_model/bytetrack_x_mot17.pth.tar",# 1
         "exp_file": "./demo/checkpoints/bytetrack_model/yolox_x_mix_det.py", # 4
     },
@@ -185,15 +178,7 @@ def imageflow_demo(video_path, track_result, sil_save_path):
                     tmp_new[int(height):int(height+new_h),int(width):int(width+new_w),:] = tmp
                     tmp_new = tmp_new.astype(np.uint8)
                     tmp = cv2.resize(tmp_new,(192,192))
-                    save_name2 = "1-{:03d}-{:03d}.png".format(tid, frame_id)
-                    mmcv.imwrite(tmp, Path(savesil_path, save_name2))
-
-
-                    # seg_image(tmp, seg_cfgs["model"]["seg_model"], save_name, savesil_path)
-                    save_name1 = "0-{:03d}-{:03d}.png".format(tid, frame_id)
-                    seg_image_mm(seg_cfgs["model"]["mm_config_file"], seg_cfgs["model"]["mm_checkpoint_file"], 
-                                    seg_cfgs["model"]["mm_palette"], tmp, Path(savesil_path, save_name), Path(savesil_path, save_name1))
-
+                    seg_image(tmp, seg_cfgs["model"]["seg_model"], save_name, savesil_path)
 
             ch = cv2.waitKey(1)
             if ch == 27 or ch == ord("q") or ch == ord("Q"):
@@ -205,7 +190,6 @@ def imageflow_demo(video_path, track_result, sil_save_path):
 
 def writeresult(pgdict, video_path, video_save_folder):
     device = torch.device("cuda" if seg_cfgs["device"] == "gpu" else "cpu")
-
     trt_file = None
     decoder = None
     predictor = Predictor(model, exp, trt_file, decoder, device, True)
