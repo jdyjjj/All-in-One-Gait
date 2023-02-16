@@ -7,6 +7,7 @@ import shutil
 import torch
 import math
 import numpy as np
+from tqdm import tqdm
 
 from tracking_utils.predictor import Predictor
 from yolox.utils import fuse_model, get_model_info
@@ -17,11 +18,18 @@ from tracking_utils.visualize import plot_tracking, plot_track
 from pretreatment import pretreat, img2pickle
 sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/paddle/")
 from seg_demo import seg_image
+sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/mm/")
+from seglib import seg_image_mm
 from yolox.exp import get_exp
+
+import mmcv
 
 seg_cfgs = {  
     "model":{
-        "seg_model" : "./demo/checkpoints/seg_model/human_pp_humansegv2_mobile_192x192_inference_model_with_softmax/deploy.yaml",# 3
+        "seg_model" : "./demo/checkpoints/seg_model/human_pp_humansegv2_mobile_192x192_inference_model_with_softmax/deploy.yaml",
+        "mm_config_file": "./demo/checkpoints/mm_model/fcn_hr18s_512x512_160k_ade20k.py",
+        "mm_checkpoint_file":"./demo/checkpoints/mm_model/fcn_hr18s_512x512_160k_ade20k_20210829_174739-f1e7c2e7.pth",
+        "mm_palette": "ade20k",
         "ckpt" :    "./demo/checkpoints/bytetrack_model/bytetrack_x_mot17.pth.tar",# 1
         "exp_file": "./demo/checkpoints/bytetrack_model/yolox_x_mix_det.py", # 4
     },
@@ -61,6 +69,7 @@ def track(video_path, video_save_folder):
     cap = cv2.VideoCapture(video_path)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     tracker = BYTETracker(frame_rate=30)
     timer = Timer()
@@ -79,8 +88,7 @@ def track(video_path, video_save_folder):
     track_results={}
     mark = True
     diff = 0
-    while True:
-        print("frame {} begins".format(frame_id))
+    for i in tqdm(range(frame_count)):
         if frame_id % 20 == 0:
             logger.info('Processing frame {} ({:.2f} fps)'.format(frame_id, 1. / max(1e-5, timer.average_time)))
         ret_val, frame = cap.read()
@@ -104,7 +112,6 @@ def track(video_path, video_save_folder):
                         online_tlwhs.append(tlwh)
                         online_ids.append(tid)
                         online_scores.append(t.score)
-                        print(f"{frame_id},{tid},{tlwh[0]:.2f},{tlwh[1]:.2f},{tlwh[2]:.2f},{tlwh[3]:.2f},{t.score:.2f},-1,-1,-1")
                         if frame_id not in track_results:
                             track_results[frame_id] = []
                         track_results[frame_id].append([tid, tlwh[0], tlwh[1], tlwh[2], tlwh[3]])
@@ -138,6 +145,7 @@ def imageflow_demo(video_path, track_result, sil_save_path):
     cap = cv2.VideoCapture(video_path)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     frame_id = 0
     fps = cap.get(cv2.CAP_PROP_FPS)
     save_video_name = video_path.split("/")[-1]
@@ -145,11 +153,10 @@ def imageflow_demo(video_path, track_result, sil_save_path):
     save_video_name = save_video_name.split(".")[0]
     results = []
     ids = list(track_result.keys())
-    while True:
+    for i in tqdm(range(frame_count)):
         ret_val, frame = cap.read()
         if ret_val:
             if frame_id in ids:
-                print("frame {} begins".format(frame_id))
                 for tidxywh in track_result[frame_id]:
                     tid = tidxywh[0]
                     tidstr = "{:03d}".format(tid)
@@ -180,8 +187,15 @@ def imageflow_demo(video_path, track_result, sil_save_path):
                     tmp_new[int(height):int(height+new_h),int(width):int(width+new_w),:] = tmp
                     tmp_new = tmp_new.astype(np.uint8)
                     tmp = cv2.resize(tmp_new,(192,192))
+                    save_name2 = "1-{:03d}-{:03d}.png".format(tid, frame_id)
+                    mmcv.imwrite(tmp, Path(savesil_path, save_name2))
 
-                    seg_image(tmp, seg_cfgs["model"]["seg_model"], save_name, savesil_path)
+
+                    # seg_image(tmp, seg_cfgs["model"]["seg_model"], save_name, savesil_path)
+                    save_name1 = "0-{:03d}-{:03d}.png".format(tid, frame_id)
+                    seg_image_mm(seg_cfgs["model"]["mm_config_file"], seg_cfgs["model"]["mm_checkpoint_file"], 
+                                    seg_cfgs["model"]["mm_palette"], tmp, Path(savesil_path, save_name), Path(savesil_path, save_name1))
+
 
             ch = cv2.waitKey(1)
             if ch == 27 or ch == ord("q") or ch == ord("Q"):
@@ -200,6 +214,7 @@ def writeresult(pgdict, video_path, video_save_folder):
     cap = cv2.VideoCapture(video_path)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = cap.get(cv2.CAP_PROP_FPS)
     os.makedirs(video_save_folder, exist_ok=True)
     save_video_name = video_path.split("/")[-1]
@@ -217,10 +232,7 @@ def writeresult(pgdict, video_path, video_save_folder):
     results = []
     mark = True
     diff = 0
-    while True:
-        if frame_id % 40 == 0:
-            print("frame {} begins".format(frame_id))
-            logger.info('Processing frame {} ({:.2f} fps)'.format(frame_id, 1. / max(1e-5, timer.average_time)))
+    for i in tqdm(range(frame_count)):
         ret_val, frame = cap.read()
         if ret_val:
             outputs, img_info = predictor.inference(frame, timer)
