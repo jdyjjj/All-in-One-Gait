@@ -96,7 +96,7 @@ Werkzeug==2.2.2
 wheel==0.38.2
 xmltodict==0.13.0
 yolox==0.3.0
-# paddlepaddle-gpu==2.4.0
+paddlepaddle-gpu==2.4.0
 torch==1.12.1
 torchaudio==0.12.1
 torchvision==0.13.1
