@@ -27,6 +27,14 @@ def loadModel(model_type, cfg_path):
     return model
 
 def gait_sil(sils, embs_save_path):
+    """Gets the features.
+
+    Args:
+        sils (list): List of Tuple (seqs, labs, typs, vies, seqL)
+        embs_save_path (Path): Output path.
+    Returns:
+        feats (dict): Dictionary of features
+    """
     gaitmodel = loadModel(**extractor_cfgs["gaitmodel"])
     gaitmodel.requires_grad_(False)
     gaitmodel.eval()
@@ -52,8 +60,15 @@ def gait_sil(sils, embs_save_path):
     return feats    
 
 def gaitfeat_compare(probe_feat:dict, gallery_feat:dict):
+    """Compares the feature between probe and gallery
+
+    Args:
+        probe_feat (dict): Dictionary of probe's features
+        gallery_feat (dict): Dictionary of gallery's features
+    Returns:
+        pg_dicts (dict): The id of probe corresponds to the id of gallery
+    """
     item = list(probe_feat.keys())
-    # for item in probe_feat.items():
     probe = item[0]
     pg_dict = {}
     pg_dicts = {}
@@ -67,8 +82,15 @@ def gaitfeat_compare(probe_feat:dict, gallery_feat:dict):
     print(pg_dicts)
     return pg_dict
 
-# def extract_sil(probe_sil, save_embs_path):
 def extract_sil(sil, save_path):
+    """Gets the features.
+
+    Args:
+        sils (list): List of Tuple (seqs, labs, typs, vies, seqL)
+        save_path (Path): Output path.
+    Returns:
+        video_feats (dict): Dictionary of features from the video
+    """
     logger.info("begin extracting")
     video_feat = gait_sil(sil, save_path)
     logger.info("extract Done")

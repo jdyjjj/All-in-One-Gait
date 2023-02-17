@@ -35,6 +35,17 @@ def compareid(data, dict, pid, threshold_value):
 
 
 def comparefeat(embs, gallery_feat: dict, pid, threshold_value):
+    """Compares the distance between features
+
+    Args:
+        embs (Tensor): Embeddings of person with pid
+        gallery_feat (dict): Dictionary of features from gallery
+        pid (str): The id of person in probe
+        threshold_value (int): Threshold
+    Returns:
+        id (str): The id in gallery
+        dic_sort (dict): Recognition result sorting dictionary
+    """
     probe_name = pid.split("-")[0]
     min = threshold_value
     id = None

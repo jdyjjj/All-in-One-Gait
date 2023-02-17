@@ -15,7 +15,7 @@ from loguru import logger
 from tracker.byte_tracker import BYTETracker
 from tracking_utils.timer import Timer
 from tracking_utils.visualize import plot_tracking, plot_track
-from pretreatment import pretreat, img2pickle
+from pretreatment import pretreat, imgs2inputs
 sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/paddle/")
 from seg_demo import seg_image
 from yolox.exp import get_exp
@@ -268,11 +268,11 @@ def writeresult(pgdict, video_path, video_save_folder):
 
 def seg(video_path, video_save_folder, sil_save_path):
     sil_save_path = imageflow_demo(video_path, video_save_folder, sil_save_path)
-    feats = img2pickle(Path(sil_save_path), 64, False, seg_cfgs["gait"]["dataset"])
-    return feats
+    inputs = imgs2inputs(Path(sil_save_path), 64, False, seg_cfgs["gait"]["dataset"])
+    return inputs
 
 def getsil(video_path, sil_save_path):
     sil_save_name = video_path.split("/")[-1]
-    feats = img2pickle(Path(sil_save_path, sil_save_name.split(".")[0]), 
+    inputs = imgs2inputs(Path(sil_save_path, sil_save_name.split(".")[0]), 
                 64, False, seg_cfgs["gait"]["dataset"])
-    return(feats)
+    return inputs

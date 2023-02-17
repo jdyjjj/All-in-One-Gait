@@ -94,22 +94,22 @@ def imgs2pickle(img_groups: Tuple, output_path: Path, img_size: int = 64, verbos
     if len(to_pickle) < 5:
         logging.warning(f'{sinfo} has less than 5 valid data.')
 
-    # return to_pickle, np.asarray(to_pickle)
-    # return (to_pickle, sinfo)
     return [[to_pickle]], [sinfo[0]], [sinfo[1]], [sinfo[2]], np.array([[len(img_groups[1])]])
 
 
-def img2pickle(input_path: Path, img_size: int = 64, verbose: bool = False, dataset='CASIAB'):
-    """Reads a group of images and saves the data in pickle format.
+def imgs2inputs(input_path: Path, img_size: int = 64, verbose: bool = False, dataset='CASIAB'):
+    """Reads a group of images and changes the data in inputs format.
 
     Args:
-        img_groups (Tuple): Tuple of (sid, seq, view) and list of image paths.
+        input_path (Path): Image path of silhouette.
         img_size (int, optional): Image resizing size. Defaults to 64.
         verbose (bool, optional): Display debug info. Defaults to False.
+    Returns:
+        inputs (list): List of Tuple (seqs, labs, typs, vies, seqL) 
     """
     img_groups = defaultdict(list)
     total_files = 0
-    feats = []
+    inputs = []
     sinfos = []
     for img_path in input_path.rglob('*.png'):
         *_, sid, seq, view, _ = img_path.as_posix().split('/')
@@ -169,9 +169,9 @@ def img2pickle(input_path: Path, img_size: int = 64, verbose: bool = False, data
         if len(to_pickle) < 5:
             logging.warning(f'{sinfo} has less than 5 valid data.')
 
-        feats.append(([[to_pickle]], [sinfo[0]], [sinfo[1]], [sinfo[2]],
+        inputs.append(([[to_pickle]], [sinfo[0]], [sinfo[1]], [sinfo[2]],
                       np.array([[len(img_groups[(sinfo[0], sinfo[1], sinfo[2])])]])))
-    return feats
+    return inputs
 
 
 def pretreat(input_path: Path, output_path: Path, img_size: int = 64, workers: int = 4, verbose: bool = False,
