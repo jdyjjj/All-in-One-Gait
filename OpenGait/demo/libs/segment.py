@@ -54,6 +54,14 @@ exp = get_exp(seg_cfgs["model"]["exp_file"], None)
 model = loadckpt(exp)
 
 def track(video_path, video_save_folder):
+    """Tracks person in the input video
+
+    Args:
+        video_path (Path): Path of input video
+        video_save_folder (Path): Tracking video storage root path after processing
+    Returns:
+        track_results (dict): Track information
+    """
     trt_file = None
     decoder = None
     device = torch.device("cuda" if seg_cfgs["device"] == "gpu" else "cpu")
@@ -133,6 +141,15 @@ def track(video_path, video_save_folder):
     return track_results
 
 def imageflow_demo(video_path, track_result, sil_save_path):
+    """Cuts the video image according to the tracking result to obtain the silhouette
+
+    Args:
+        video_path (Path): Path of input video
+        track_result (dict): Track information
+        sil_save_path (Path): The root directory where the silhouette is stored
+    Returns:
+        Path: The directory of silhouette
+    """
     cap = cv2.VideoCapture(video_path)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
     height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
@@ -189,6 +206,13 @@ def imageflow_demo(video_path, track_result, sil_save_path):
     return Path(sil_save_path, save_video_name)
 
 def writeresult(pgdict, video_path, video_save_folder):
+    """Writes the recognition result back into the video
+
+    Args:
+        pgdict (dict): The id of probe corresponds to the id of gallery
+        video_path (Path): Path of input video
+        video_save_folder (Path): Tracking video storage root path after processing
+    """
     device = torch.device("cuda" if seg_cfgs["device"] == "gpu" else "cpu")
     trt_file = None
     decoder = None
@@ -266,8 +290,17 @@ def writeresult(pgdict, video_path, video_save_folder):
             f.writelines(results)
         logger.info(f"save results to {res_file}")
 
-def seg(video_path, video_save_folder, sil_save_path):
-    sil_save_path = imageflow_demo(video_path, video_save_folder, sil_save_path)
+def seg(video_path, track_result, sil_save_path):
+    """Cuts the video image according to the tracking result to obtain the silhouette
+
+    Args:
+        video_path (Path): Path of input video
+        track_result (Path): Track information
+        sil_save_path (Path): The root directory where the silhouette is stored
+    Returns:
+        inputs (list): List of Tuple (seqs, labs, typs, vies, seqL) 
+    """
+    sil_save_path = imageflow_demo(video_path, track_result, sil_save_path)
     inputs = imgs2inputs(Path(sil_save_path), 64, False, seg_cfgs["gait"]["dataset"])
     return inputs
 
