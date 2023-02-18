@@ -25,6 +25,7 @@ def main():
     video1_path = "./demo/output/Inputvideos/demo4.mp4"
     video2_path = "./demo/output/Inputvideos/demo6.mp4"
 
+    # track
     track_result1 = track(video1_path, video_save_folder)
     track_result2 = track(video2_path, video_save_folder)
     print(track_result1)
