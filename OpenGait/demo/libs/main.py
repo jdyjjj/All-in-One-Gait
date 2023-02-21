@@ -28,25 +28,22 @@ def main():
     # track
     track_result1 = track(video1_path, video_save_folder)
     track_result2 = track(video2_path, video_save_folder)
-    print(track_result1)
-    # track_result2 = track(video2_path, video_save_folder)
+
     silhouette1 = seg(video1_path, track_result1, save_root+'/silhouette/')
     silhouette2 = seg(video2_path, track_result2, save_root+'/silhouette/')
 
-    # # silhouette1 = seg(video1_path, video_save_folder, save_root+'/silhouette/')
-    # # silhouette2 = seg(video2_path, video_save_folder, save_root+'/silhouette/')
-    # # silhouette1 = getsil(video1_path, save_root+'/silhouette/')
-    # # silhouette2 = getsil(video2_path, save_root+'/silhouette/')
+    # silhouette1 = getsil(video1_path, save_root+'/silhouette/')
+    # silhouette2 = getsil(video2_path, save_root+'/silhouette/')
 
-    # # extract
+    # extract
     probe_feat = extract_sil(silhouette1, save_root+'/Gaitembs/')
     gallery_feat = extract_sil(silhouette2, save_root+'/Gaitembs/')
 
-    # # recognise
+    # recognise
     pgdict1 = recognise_feat(probe_feat, gallery_feat)
     pgdict2 = recognise_feat(gallery_feat, probe_feat)
 
-    # # write the result back to the video
+    # write the result back to the video
     writeresult(pgdict1, video1_path, video_save_folder)
     writeresult(pgdict2, video2_path, video_save_folder)
 
