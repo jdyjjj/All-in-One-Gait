@@ -22,7 +22,8 @@ from utils import get_valid_args, is_list, is_dict, np2var, ts2np, list2var, get
 from .dataset import DataSet
 
 model_cfgs = {  
-    "gait_model": "./demo/checkpoints/gait_model/Baseline-250000.pt"
+    # "gait_model": "./demo/checkpoints/gait_model/Baseline-250000.pt"
+    "gait_model": "./demo/checkpoints/gait_model/GaitBase_DA-180000.pt"
 }
 
 class CollateFn(object):
