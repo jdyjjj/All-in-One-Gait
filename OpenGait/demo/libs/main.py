@@ -22,8 +22,8 @@ def main():
     
     save_root = './demo/output/'
     # seg
-    video1_path = "./demo/output/Inputvideos/demo4.mp4"
-    video2_path = "./demo/output/Inputvideos/demo6.mp4"
+    video1_path = "./demo/output/Inputvideos/demo1.mp4"
+    video2_path = "./demo/output/Inputvideos/demo2.mp4"
 
     # track
     track_result1 = track(video1_path, video_save_folder)
