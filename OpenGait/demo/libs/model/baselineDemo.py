@@ -419,8 +419,8 @@ class BaselineDemo(nn.Module):
 
         embed_1 = self.FCs(feat)  # [n, c, p]
         embed_2, logits = self.BNNecks(embed_1)  # [n, c, p]
-        embed = embed_1
-
+        # embed = embed_1
+        embed = logits
         n, _, s, h, w = sils.size()
         retval = {
             'training_feat': {
