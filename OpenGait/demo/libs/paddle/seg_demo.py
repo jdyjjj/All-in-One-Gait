@@ -94,10 +94,8 @@ def seg_image(img, config, save_name, savesil_path):
     out_img, out_mask = predictor.run(img, bg_img)
 
     therehold = 80
-    for i in range(out_mask.shape[0]):
-        for j in range(out_mask.shape[1]):
-            for k in range(out_mask.shape[2]):
-                out_mask[i][j][k]=np.where(out_mask[i][j][k]<therehold,0,255)
+    temp = out_mask < therehold
+    out_mask = np.where(temp, 0, 255)
     
     if not os.path.exists(savesil_path):
         os.makedirs(savesil_path)
