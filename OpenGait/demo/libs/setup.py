@@ -47,16 +47,12 @@ with open("yolox/__init__.py", "r") as f:
     ).group(1)
 
 
-with open("README.md", "r") as f:
-    long_description = f.read()
-
 
 setuptools.setup(
     name="yolox",
     version=version,
     author="basedet team",
     python_requires=">=3.6",
-    long_description=long_description,
     ext_modules=get_extensions(),
     classifiers=["Programming Language :: Python :: 3", "Operating System :: OS Independent"],
     cmdclass={"build_ext": torch.utils.cpp_extension.BuildExtension},
