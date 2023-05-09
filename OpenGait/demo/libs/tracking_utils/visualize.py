@@ -110,7 +110,7 @@ def plot_track(image, tlwhs, obj_ids, obj_colors, scores=None, frame_id=0, fps=0
             id_text = id_text + ', {}'.format(int(ids2[i]))
         color = get_color(abs(obj_color))
         cv2.rectangle(im, intbox[0:2], intbox[2:4], color=color, thickness=line_thickness)
-        cv2.putText(im, id_text, (intbox[0], intbox[1]), cv2.FONT_HERSHEY_PLAIN, text_scale, (0, 0, 255),
+        cv2.putText(im, id_text, (intbox[0], intbox[1]), cv2.FONT_HERSHEY_PLAIN, text_scale, color,
                     thickness=text_thickness)
     return im
 
