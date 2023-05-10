@@ -53,7 +53,7 @@ def imageflow_demo(video_path, track_result, sil_save_path):
     for i in tqdm(range(frame_count)):
         ret_val, frame = cap.read()
         if ret_val:
-            if frame_id in ids and frame_id%5==0:
+            if frame_id in ids and frame_id%4==0:
                 for tidxywh in track_result[frame_id]:
                     tid = tidxywh[0]
                     tidstr = "{:03d}".format(tid)
