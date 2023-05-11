@@ -82,13 +82,11 @@ python demo/libs/main.py
 cd TrackGait/OpenGait/output
 
 output
-	 └——————GaitFeatures: This stores the corresponding gait features
+   └——————GaitFeatures: This stores the corresponding gait features
    └——————Inputvideos: This is the folder where the input videos are put
    |——————Outputvideos
    |        └——————track_vis
-   | 				|				└——————gait_model
-	 | 				| 						└——————timestamp
-   |        └——————seg_model
+   |                └——————timestamp
    └——————silhouette: This stores the corresponding gait silhouette images
    
    
