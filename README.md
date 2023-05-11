@@ -4,6 +4,8 @@
 
 TrackGait is a sub project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/). Implemented a gait recognition system.
 
+🎉🎉🎉 **[\*OpenGait\*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
+
 ## How to use
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wZE9wo_Y6Hwgp7tkUbGrCZPAa-ChX2g2?usp=sharing)
