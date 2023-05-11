@@ -23,7 +23,7 @@ def main():
     probe3_video_path  = "./demo/output/Inputvideos/probe3.mp4"
     probe4_video_path  = "./demo/output/Inputvideos/probe4.mp4"
 
-    # track
+    # tracking
     gallery_track_result = track(gallery_video_path, video_save_folder)
     probe1_track_result  = track(probe1_video_path, video_save_folder)
     probe2_track_result  = track(probe2_video_path, video_save_folder)
@@ -57,16 +57,13 @@ def main():
         probe3_silhouette  = seg(probe3_video_path , probe3_track_result , save_root+'/silhouette/')
         probe4_silhouette  = seg(probe4_video_path , probe4_track_result , save_root+'/silhouette/')
 
-
-    # extract
-
+    # recognise
     gallery_feat = extract_sil(gallery_silhouette, save_root+'/GaitFeatures/')
     probe1_feat  = extract_sil(probe1_silhouette , save_root+'/GaitFeatures/')
     probe2_feat  = extract_sil(probe2_silhouette , save_root+'/GaitFeatures/')
     probe3_feat  = extract_sil(probe3_silhouette , save_root+'/GaitFeatures/')
     probe4_feat  = extract_sil(probe4_silhouette , save_root+'/GaitFeatures/')
 
-    # recognise
     gallery_probe1_result = compare(probe1_feat, gallery_feat)
     gallery_probe2_result = compare(probe2_feat, gallery_feat)
     gallery_probe3_result = compare(probe3_feat, gallery_feat)
