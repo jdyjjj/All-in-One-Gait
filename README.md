@@ -4,7 +4,7 @@
 
 TrackGait is a sub project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/). Implemented a gait recognition system.
 
-🎉🎉🎉 **[\*OpenGait\*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
+🎉🎉🎉 **[*OpenGait*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
 
 ## How to use
 
