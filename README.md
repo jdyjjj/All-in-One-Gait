@@ -2,17 +2,20 @@
 
 <div align="center"><img src="./assets/track.gif" width = "150" height = "150" alt="track" /><img src="./assets/seg.gif" width = "150" height = "150" alt="seg" /><img src="./assets/sil.gif" width = "150" height = "150" alt="sil" /></div>
 
-TrackGait is a sub project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by the [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/). Implemented a gait recognition system.
+TrackGait is a sub-project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) that develops a gait recognition system.
 
 🎉🎉🎉 **[*OpenGait*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
 
 ## How to use
+The workflow of TrackGait involves the proecesses of pedestrian tracking, segmentation and identification.
 
-### Run in Colab
+Users are encougraed to update the gait recognition models with watching the lastest SOTA methods in [OpenGait](https://github.com/ShiqiYu/OpenGait).
+
+### A. Run in Colab (Recommended)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wZE9wo_Y6Hwgp7tkUbGrCZPAa-ChX2g2?usp=sharing)
 
-### Run on the host machine
+### B. Run on the host machine
 
 #### Step1. Installation
 ```
@@ -104,7 +107,7 @@ output
 
 ## Authors:
 
-**Open Gait Team (OGT)**
+**OpenGait Team (OGT)**
 
 - [Dongyang Jin(金冬阳)](https://faculty.sustech.edu.cn/?p=176498&tagid=yusq&cat=2&iscss=1&snapid=1&go=1&orderby=date), 11911221@mail.sustech.edu.cn
 - [Chao Fan (樊超)](https://faculty.sustech.edu.cn/?p=128578&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12131100@mail.sustech.edu.cn
@@ -113,7 +116,21 @@ output
 - [Junhao Liang (梁峻豪)](https://faculty.sustech.edu.cn/?p=95401&tagid=yusq&cat=2&iscss=1&snapid=1&orderby=date), 12132342@mail.sustech.edu.cn
 
 ## Acknowledgement
+- Gait Recognition: [OpenGait](https://github.com/ShiqiYu/OpenGait)
+- Pedestrian Tracking: [ByteTrack](https://github.com/ifzhang/ByteTrack)
+- Pedestrian Segementation: [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg)
 
-- ByteTrack: [bytetrack](https://github.com/ifzhang/ByteTrack)
-- Paddleseg: [paddleseg](https://github.com/PaddlePaddle/PaddleSeg)
+## Citation
+```
+@misc{fan2022opengait,
+      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
+      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
+      year={2022},
+      eprint={2211.06597},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
+**Note:**
+This code is only used for **academic purposes**, people cannot use this code for anything that might be considered commercial use.
