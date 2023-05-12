@@ -12,9 +12,7 @@ The workflow of TrackGait involves the proecesses of pedestrian tracking, segmen
 Users are encougraed to update the gait recognition models with watching the lastest SOTA methods in [OpenGait](https://github.com/ShiqiYu/OpenGait).
 
 ### A. Run in Colab (Recommended)
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]
-(https://colab.research.google.com/drive/192ZJrRC8NxVAkowNWnMhkO7_q1uzkzS7?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/192ZJrRC8NxVAkowNWnMhkO7_q1uzkzS7?usp=sharing)
 
 ### B. Run on the host machine
 
