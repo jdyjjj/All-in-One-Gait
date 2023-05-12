@@ -13,7 +13,8 @@ Users are encougraed to update the gait recognition models with watching the las
 
 ### A. Run in Colab (Recommended)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wZE9wo_Y6Hwgp7tkUbGrCZPAa-ChX2g2?usp=sharing)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)
+(https://colab.research.google.com/drive/192ZJrRC8NxVAkowNWnMhkO7_q1uzkzS7?usp=sharing)
 
 ### B. Run on the host machine
 
