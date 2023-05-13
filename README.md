@@ -1,13 +1,13 @@
-<img src="./assets/logo.png" width = "330" height = "110" alt="logo" />
+<img src="./assets/logo2.png" width = "330" height = "110" alt="logo" />
 
 <div align="center"><img src="./assets/track.gif" width = "150" height = "150" alt="track" /><img src="./assets/seg.gif" width = "150" height = "150" alt="seg" /><img src="./assets/sil.gif" width = "150" height = "150" alt="sil" /></div>
 
-TrackGait is a sub-project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) that develops a gait recognition system.
+All-in-One-Gait is a sub-project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) that develops a gait recognition system.
 
 🎉🎉🎉 **[*OpenGait*](https://arxiv.org/pdf/2211.06597.pdf) has been accpected by CVPR2023 as a highlight paper！** 🎉🎉🎉
 
 ## How to use
-The workflow of TrackGait involves the proecesses of pedestrian tracking, segmentation and identification.
+The workflow of All-in-One-Gait involves the proecesses of pedestrian tracking, segmentation and identification.
 
 Users are encougraed to update the gait recognition models with watching the lastest SOTA methods in [OpenGait](https://github.com/ShiqiYu/OpenGait).
 
@@ -18,8 +18,8 @@ Users are encougraed to update the gait recognition models with watching the las
 
 #### Step1. Installation
 ```
-git clone https://github.com/jdyjjj/TrackGait.git
-cd TrackGait
+git clone https://github.com/jdyjjj/All-in-One-Gait.git
+cd All-in-One-Gait
 pip install -r requirements.txt
 pip install yolox
 ```
@@ -48,7 +48,7 @@ checkpoints
 ##### Get the checkpoint of gait model
 
 ```
-cd TrackGait/OpenGait/demo/checkpoints
+cd All-in-One-Gait/OpenGait/demo/checkpoints
 mkdir gait_model
 cd gait_model
 wget https://github.com/ShiqiYu/OpenGait/releases/download/v2.0/pretrained_grew_gaitbase.zip
@@ -58,7 +58,7 @@ unzip -j pretrained_grew_gaitbase.zip
 
 ##### Get the checkpoint of tracking model
 ```
-cd TrackGait/OpenGait/demo/checkpoints/bytetrack_model
+cd All-in-One-Gait/OpenGait/demo/checkpoints/bytetrack_model
 pip install --upgrade --no-cache-dir gdown
 gdown https://drive.google.com/uc?id=1P4mY0Yyd3PPTybgZkjMYhFri88nTmJX5
 ```
@@ -69,7 +69,7 @@ This is the link of bytetrack, download it and put it in the folder "byte track_
 
 ##### Get the checkpoint of segment model
 ```
-cd TrackGait/OpenGait/demo/checkpoints
+cd All-in-One-Gait/OpenGait/demo/checkpoints
 mkdir seg_model
 cd seg_model
 wget https://paddleseg.bj.bcebos.com/dygraph/pp_humanseg_v2/human_pp_humansegv2_mobile_192x192_inference_model_with_softmax.zip
@@ -78,16 +78,16 @@ unzip human_pp_humansegv2_mobile_192x192_inference_model_with_softmax.zip
 
 #### Step3. Run demo
 ```
-cd TrackGait/OpenGait
+cd All-in-One-Gait/OpenGait
 python demo/libs/main.py
 ```
 
-TrackGait mainly consists of three processes, tracking, segment, and recognition. In main.py, you need to select two video inputs and specify one as the gallery and one as the probe to obtain the recognized results. In main.py, you need to select two video inputs and specify one as the gallery and one as the probe to obtain the recognized results. The specific video results can be viewed in path **"TrackGait/OpenGait/demo/output/Outputvideos/track_vis/{timestamp}"**.
+All-in-One-Gait mainly consists of three processes, tracking, segment, and recognition. In main.py, you need to select two video inputs and specify one as the gallery and one as the probe to obtain the recognized results. In main.py, you need to select two video inputs and specify one as the gallery and one as the probe to obtain the recognized results. The specific video results can be viewed in path **"All-in-One-Gait/OpenGait/demo/output/Outputvideos/track_vis/{timestamp}"**.
 
 #### Step4. See the result
 
 ```
-cd TrackGait/OpenGait/demo/output
+cd All-in-One-Gait/OpenGait/demo/output
 
 output
    └——————GaitFeatures: This stores the corresponding gait features
