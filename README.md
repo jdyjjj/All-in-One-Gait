@@ -107,11 +107,20 @@ cd All-in-One-Gait/OpenGait/demo/output
 
 output
    └——————GaitFeatures: This stores the corresponding gait features
-   └——————Inputvideos: This is the folder where the input videos are put
-   |——————Outputvideos
-   |        └——————track_vis
-   |                └——————timestamp
-   └——————silhouette: This stores the corresponding gait silhouette images
+   └——————GaitSilhouette: This stores the corresponding gait silhouette images
+   └——————InputVideos: This is the folder where the input videos are put
+   |       └——————gallery.mp4
+   |       └——————probe1.mp4
+   |       └——————probe2.mp4
+   |       └——————probe3.mp4
+   |       └——————probe4.mp4
+   |——————OutputVideos
+   |      └——————timestamp
+   |       └——————gallery.mp4
+   |       └——————G-gallery_P-probe1.mp4
+   |       └——————G-gallery_P-probe2.mp4
+   |       └——————G-gallery_P-probe3.mp4
+   |       └——————G-gallery_P-probe4.mp4
    └——————demo_video_result
    
 ```
