@@ -114,14 +114,14 @@ output
    |       └——————probe2.mp4
    |       └——————probe3.mp4
    |       └——————probe4.mp4
-   |——————OutputVideos
-   |      └——————timestamp
-   |       └——————gallery.mp4
-   |       └——————G-gallery_P-probe1.mp4
-   |       └——————G-gallery_P-probe2.mp4
-   |       └——————G-gallery_P-probe3.mp4
-   |       └——————G-gallery_P-probe4.mp4
-   └——————demo_video_result
+   └——————OutputVideos
+           └——————{timestamp}
+                   └——————gallery.mp4
+                   └——————G-gallery_P-probe1.mp4
+                   └——————G-gallery_P-probe2.mp4
+                   └——————G-gallery_P-probe3.mp4
+                   └——————G-gallery_P-probe4.mp4
+
    
 ```
 
