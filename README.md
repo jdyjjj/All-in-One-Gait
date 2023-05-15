@@ -118,7 +118,7 @@ output
 
 **timestamp**: Store the result video of the track here, naming it consistent with the input video. In addition, videos with the suffix `- After. mp4` are obtained after gait recognition.
 
-## Authors:
+## Authors
 
 **OpenGait Team (OGT)**
 
