@@ -121,11 +121,9 @@ output
                    └——————G-gallery_P-probe2.mp4
                    └——————G-gallery_P-probe3.mp4
                    └——————G-gallery_P-probe4.mp4
-
-   
 ```
 
-**timestamp**: Store the result video of the track here, naming it consistent with the input video. In addition, videos with the suffix `- After. mp4` are obtained after gait recognition.
+**{timestamp}**: Store the result video of tracking here, naming it consistent with the input video. In addition, videos named like G-{gallery_video_name}_P-{probe_video_name}.mp4 are obtained after gait recognition.
 
 ## Authors
 
