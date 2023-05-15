@@ -166,8 +166,12 @@ def writeresult(pgdict, video_path, video_save_folder):
     fps = cap.get(cv2.CAP_PROP_FPS)
     os.makedirs(video_save_folder, exist_ok=True)
     save_video_name = video_path.split("/")[-1]
-    save_video_path = save_video_name.split(".")[0]+ "-After.mp4"
-    save_video_path = osp.join(video_save_folder, save_video_path)
+    first_key = next(iter(pgdict))
+    gallery_name = first_key.split("-")[0]
+    probe_name = save_video_name
+    # save_video_path = save_video_name.split(".")[0]+ "-After.mp4"
+    save_video_name = "G-{}_P-{}".format(gallery_name, probe_name)
+    save_video_path = osp.join(video_save_folder, save_video_name)
     print(f"video save_path is {save_video_path}")
     vid_writer = cv2.VideoWriter(
         save_video_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (int(width), int(height))
