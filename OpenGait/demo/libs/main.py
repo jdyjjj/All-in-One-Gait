@@ -29,15 +29,15 @@ def main():
     probe4_track_result  = track(probe4_video_path, video_save_folder)
 
     gallery_video_name = gallery_video_path.split("/")[-1]
-    gallery_video_name = save_root+'/silhouette/'+gallery_video_name.split(".")[0]
+    gallery_video_name = save_root+'/GaitSilhouette/'+gallery_video_name.split(".")[0]
     probe1_video_name  = probe1_video_path.split("/")[-1]
-    probe1_video_name  = save_root+'/silhouette/'+probe1_video_name.split(".")[0]
+    probe1_video_name  = save_root+'/GaitSilhouette/'+probe1_video_name.split(".")[0]
     probe2_video_name  = probe2_video_path.split("/")[-1]
-    probe2_video_name  = save_root+'/silhouette/'+probe2_video_name.split(".")[0]
+    probe2_video_name  = save_root+'/GaitSilhouette/'+probe2_video_name.split(".")[0]
     probe3_video_name  = probe3_video_path.split("/")[-1]
-    probe3_video_name  = save_root+'/silhouette/'+probe3_video_name.split(".")[0]
+    probe3_video_name  = save_root+'/GaitSilhouette/'+probe3_video_name.split(".")[0]
     probe4_video_name  = probe4_video_path.split("/")[-1]
-    probe4_video_name  = save_root+'/silhouette/'+probe4_video_name.split(".")[0]
+    probe4_video_name  = save_root+'/GaitSilhouette/'+probe4_video_name.split(".")[0]
     exist = os.path.exists(gallery_video_name) and os.path.exists(probe1_video_name) \
             and os.path.exists(probe2_video_name) and os.path.exists(probe3_video_name) \
             and os.path.exists(probe4_video_name)

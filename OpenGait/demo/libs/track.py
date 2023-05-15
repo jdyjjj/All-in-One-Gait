@@ -165,10 +165,10 @@ def writeresult(pgdict, video_path, video_save_folder):
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = cap.get(cv2.CAP_PROP_FPS)
     os.makedirs(video_save_folder, exist_ok=True)
-    save_video_name = video_path.split("/")[-1]
+    video_name = video_path.split("/")[-1]
     first_key = next(iter(pgdict))
-    gallery_name = first_key.split("-")[0]
-    probe_name = save_video_name
+    gallery_name = pgdict[first_key].split("-")[0]
+    probe_name = video_name
     # save_video_path = save_video_name.split(".")[0]+ "-After.mp4"
     save_video_name = "G-{}_P-{}".format(gallery_name, probe_name)
     save_video_path = osp.join(video_save_folder, save_video_name)
@@ -176,7 +176,7 @@ def writeresult(pgdict, video_path, video_save_folder):
     vid_writer = cv2.VideoWriter(
         save_video_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (int(width), int(height))
     )
-    save_video_name = save_video_name.split(".")[0]
+    video_name = video_name.split(".")[0]
 
     tracker = BYTETracker(frame_rate=30)
     timer = Timer()
@@ -201,9 +201,9 @@ def writeresult(pgdict, video_path, video_save_folder):
                         diff = t.track_id - 1
                     track_id = t.track_id - diff
 
-                    pid = "{}-{:03d}".format(save_video_name, track_id)
+                    pid = "{}-{:03d}".format(video_name, track_id)
                     tid = pgdict[pid]
-                    # demo 
+                    # demo
                     colorid = int(tid.split("-")[1])
                     # colorid = track_id
                     vertical = tlwh[2] / tlwh[3] > 1.6
@@ -231,9 +231,9 @@ def writeresult(pgdict, video_path, video_save_folder):
             break
         frame_id += 1
 
-    if track_cfgs["save_result"] == "True":
-        txtfile = "{}-{}".format(save_video_name, "After.txt")
-        res_file = osp.join(video_save_folder, txtfile)
-        with open(res_file, 'w') as f:
-            f.writelines(results)
-        logger.info(f"save results to {res_file}")
+    # if track_cfgs["save_result"] == "True":
+    #     txtfile = "{}-{}".format(save_video_name, "After.txt")
+    #     res_file = osp.join(video_save_folder, txtfile)
+    #     with open(res_file, 'w') as f:
+    #         f.writelines(results)
+    #     logger.info(f"save results to {res_file}")
