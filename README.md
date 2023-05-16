@@ -6,7 +6,7 @@
 
 All-in-One-Gait is a sub-project of [OpenGait](https://github.com/ShiqiYu/OpenGait) provided by [Shiqi Yu Group](https://faculty.sustech.edu.cn/yusq/) that develops a gait recognition system.
 
-The workflow of All-in-One-Gait primarily involves the proecesses of pedestrian tracking, segmentation and recognition.
+The workflow of All-in-One-Gait primarily involves the processes of pedestrian tracking, segmentation and recognition.
 
 Users are encougraed to update the gait recognition models with watching the lastest SOTA methods in [OpenGait](https://github.com/ShiqiYu/OpenGait).
 
