@@ -142,13 +142,13 @@ output
 
 ## Citation
 ```
-@misc{fan2022opengait,
-      title={OpenGait: Revisiting Gait Recognition Toward Better Practicality}, 
-      author={Chao Fan and Junhao Liang and Chuanfu Shen and Saihui Hou and Yongzhen Huang and Shiqi Yu},
-      year={2022},
-      eprint={2211.06597},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@InProceedings{Fan_2023_CVPR,
+    author    = {Fan, Chao and Liang, Junhao and Shen, Chuanfu and Hou, Saihui and Huang, Yongzhen and Yu, Shiqi},
+    title     = {OpenGait: Revisiting Gait Recognition Towards Better Practicality},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2023},
+    pages     = {9707-9716}
 }
 ```
 
