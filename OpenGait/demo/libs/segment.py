@@ -18,6 +18,7 @@ from tracking_utils.visualize import plot_tracking, plot_track
 from pretreatment import pretreat, imgs2inputs
 sys.path.append((os.path.dirname(os.path.abspath(__file__) )) + "/paddle/")
 from seg_demo import seg_image
+from infer import Predictor_opengait
 from yolox.exp import get_exp
 
 seg_cfgs = {  
@@ -40,8 +41,8 @@ def imageflow_demo(video_path, track_result, sil_save_path):
         Path: The directory of silhouette
     """
     cap = cv2.VideoCapture(video_path)
-    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
-    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
+    frame_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
+    frame_height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     frame_id = 0
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -50,10 +51,14 @@ def imageflow_demo(video_path, track_result, sil_save_path):
     save_video_name = save_video_name.split(".")[0]
     results = []
     ids = list(track_result.keys())
+
+    # this is a time consuming operation
+    predictor = Predictor_opengait(seg_cfgs["model"]["seg_model"])
+
     for i in tqdm(range(frame_count)):
         ret_val, frame = cap.read()
         if ret_val:
-            if frame_id in ids and frame_id%4==0:
+            if frame_id in ids and frame_id % 4 == 0:
                 for tidxywh in track_result[frame_id]:
                     tid = tidxywh[0]
                     tidstr = "{:03d}".format(tid)
@@ -77,14 +82,14 @@ def imageflow_demo(video_path, track_result, sil_save_path):
 
                     save_name = "{:03d}-{:03d}.png".format(tid, frame_id)
                     side = max(new_w,new_h)
-                    tmp_new = [[[255,255,255]]*side]*side
+                    tmp_new = [[[255,255,255]] * side] * side
                     tmp_new = np.array(tmp_new)
-                    width = math.floor((side-new_w)/2)
-                    height = math.floor((side-new_h)/2)
-                    tmp_new[int(height):int(height+new_h),int(width):int(width+new_w),:] = tmp
+                    width = math.floor((side-new_w) / 2)
+                    height = math.floor((side-new_h) / 2)
+                    tmp_new[int(height):int(height + new_h),int(width):int(width + new_w),:] = tmp
                     tmp_new = tmp_new.astype(np.uint8)
-                    tmp = cv2.resize(tmp_new,(192,192))
-                    seg_image(tmp, seg_cfgs["model"]["seg_model"], save_name, savesil_path)
+                    tmp = cv2.resize(tmp_new, (192, 192))
+                    seg_image(tmp, predictor, save_name, savesil_path)
 
             ch = cv2.waitKey(1)
             if ch == 27 or ch == ord("q") or ch == ord("Q"):

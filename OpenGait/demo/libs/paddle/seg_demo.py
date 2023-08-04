@@ -88,8 +88,8 @@ def makedirs(save_dir):
         os.makedirs(dirname)
 
 
-def seg_image(img, config, save_name, savesil_path):
-    predictor = Predictor_opengait(config)
+def seg_image(img, predictor, save_name, savesil_path):
+    # predictor = Predictor_opengait(config)
     bg_img = 255 * np.ones(img.shape)
     out_img, out_mask = predictor.run(img, bg_img)
 
